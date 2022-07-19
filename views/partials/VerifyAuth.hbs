@@ -1,0 +1,19 @@
+{{ #if requiresAuth}}
+
+<script>
+//se valida que el token sea correcto
+
+async function verifyToken() {
+    if (localStorage.getItem("token")) {
+        
+         await axios.post("/auth/verify");
+        
+    } else { 
+//si token no existe se redirecciona al login
+    location.href = "/login";
+    }
+}
+verifyToken();
+</script>
+
+{{/if}}

@@ -1,0 +1,61 @@
+<div class="py-5 container">
+  <h2>Iniciar Sesión</h2>
+  
+
+  
+    <div class="form-group border">
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control w-50 m-auto" id="email" type="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control w-50 m-auto" id="password" type="password">
+      </div>
+   
+    <button class="btn btn-light mb-3" onclick="login()">Ingresar</button>
+    {{!--<p>¿Aún no tienes cuenta? <a href="/registro">Regístrate</a></p>--}}
+   </div>
+  {{!--<p id="loginError" class="bg-danger text-white p-3 d-none">
+          Usuario o contraseña incorrecta ;
+        </p>
+        <div id="loginSuccess" class="text-center d-none">
+          <p class="bg-success text-white p-3 mb-2">
+            Usuario autenticado con éxito;
+          </p>
+          <p class="p-3">
+            <a id="private" href="/Servicio" class="text-white">Solicitar servicio</a>
+          </p>
+        </div>--}}
+
+  
+  
+</div>
+
+<script>
+  async function login() {
+    try {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      let payload = { email, password }
+      const { data } = await axios.post("api/login" , payload);
+      alert("usuario ingresado con exito");
+      console.log(data)
+      localStorage.setItem("user", JSON.stringify(data.cliente));
+      localStorage.setItem("token", data.token);
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+      window.location.href = '/servicio';
+      
+      console.log(response.data);
+      //window.location.href = "/Servicio?token=" + datatoken;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+</script>
+
+
+  
+  
+  
+

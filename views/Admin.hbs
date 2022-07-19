@@ -1,0 +1,35 @@
+
+<h2 class="mb-2">Clientes registrados</h2>
+
+<table class="table text-white">
+  <thead>
+    <tr>
+      
+      <th scope="col">Rut</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">email</th>
+    
+      </tr>
+  </thead>
+
+  <tbody id="cuerpo">
+    {{#each clientes}}
+      <tr>
+        
+        <td>{{this.rut}}</td>
+        <td>{{this.nombre}}</td>
+        <td>{{this.apellido}}</td>
+        <td>{{this.telefono}}</td>
+         <td>{{this.direccion}}</td>
+         <td>{{this.email}}</td>
+       
+      </tr>
+      {{/each}}
+  </tbody>
+</table>
+
+
+

@@ -1,0 +1,46 @@
+<!--opcion 1 -->
+
+<div class="w-50 m-auto">
+  <div class="row my-5 border rounded p-5">
+      <h5 class="text-center mb-5 col-12">REGISTRATE</h5>
+      <div class="col col-4">Rut:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="rut"></div>
+      <div class="col col-4">Nombre:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="nombre"></div>
+      <div class="col col-4">Apellido:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="apellido"></div>
+      <div class="col col-4">Telefono:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="telefono"></div>
+      <div class="col col-4">Dirección:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="direccion"></div>
+      <div class="col col-4">email:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="email"></div>
+      <div class="col col-4">Password:</div>
+      <div class="col col-8"><input type="password" class="form-control" id="password"></div>
+      <div class="col-12 mt-5">
+          <button class="bg-light rounded text-success m-auto" onclick="saveUser()">Registrar</button>
+      </div>
+  </div>
+</div>
+
+
+<script>
+    async function saveUser() {
+        const rut = document.getElementById('rut').value;
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const telefono = document.getElementById('telefono').value;
+        const direccion = document.getElementById('direccion').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    let payload = { rut, nombre, apellido, telefono, direccion, email, password}
+    const data = await axios.post("api/registro" , payload);
+    //const data = await axios.get("api/listado");
+    alert("usuario registrado con exito");
+     window.location.href = '/login';
+     console.log(response.data);
+     //window.location.href = "/Admin";
+    //console.log(data)
+    }
+</script>
+

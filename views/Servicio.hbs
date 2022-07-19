@@ -1,0 +1,75 @@
+
+<!--opcion 1 -->
+<div class="w-50 m-auto">
+  <div class="row my-5 border rounded p-5">
+      <h3 class="text-center mb-5 col-12">Ingrese los datos</h3>
+      <div class="col col-4">id solicitud:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="id_solicitud"></div>
+      <div class="col col-4">rut:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="rut"></div>
+      <div class="col col-4">fecha solicitud:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="fecha_solicitud"></div>
+      <div class="col col-4">numero certificacion:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="numero_certificado"></div>
+      <div class="col col-4">fecha entrega:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="fecha_entrega"></div>
+      <div class="col col-4">estado solicitud:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="estado_solicitud"></div>
+      <div class="col col-4">codigo equipo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="codigo_equipo"></div>
+         
+      </div>
+  </div>
+</div>
+
+<h3 class="text-center mb-5 col-12">Seleccione tipo de trabajo</h3>
+<select class="form-select" aria-label="Default select example">
+  
+  <option selected>Tipo de trabajo</option>
+  <option value="1">reparación</option>
+  <option value="2">calibración</option>
+
+</select>
+
+<button class="bg-light rounded text-success m-auto" onclick="saveService()">Ingresar solicitud</button>
+          {{!-- <p id="creado" class="bg-success text-center text-white p-3 d-none">
+          Servicio creado con éxito &#128131;
+        </p>--}}
+
+
+
+<script> //usado en registro
+    async function saveService() {
+        const id_solicitud = document.getElementById('id_solicitud').value;
+        const rut = document.getElementById('rut').value;
+        const fecha_solicitud = document.getElementById('fecha_solicitud').value;
+        //const numero_certificacion = document.getElementById('numero de certificacion').value; lo entrega el admin
+        const fecha_entrega = document.getElementById('fecha_entrega').value;
+        const estado_solicitud = document.getElementById('estado_solicitud').value;
+        const codigo_equipo = document.getElementById('codigo_equipo').value;
+    let payload = { id_solicitud, rut, fecha_solicitud, fecha_entrega, estado_solicitud, codigo_equipo}
+    const data = await axios.post("api/Servicio" , payload);
+    //const data = await axios.get("api/listadoC");
+     window.location.href = "/listadoA";
+
+    console.log(data)
+   }
+</script>
+
+
+<h1>Vista privada</h1>
+
+<script>
+  if (!localStorage.getItem("token")) {
+    window.location.replace("/login");
+  }
+
+  async function getClientes() {
+    const { data } = axios.get('/clientes');
+    console.log(data);
+  }
+  getClientes();
+</script>
+
+
+
