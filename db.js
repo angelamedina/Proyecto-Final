@@ -18,7 +18,7 @@ async function nuevoCliente(rut,  nombre, apellido, telefono, direccion, email, 
     return cliente;
 }
 
-//obtener usuarios       revisar auth si corresponde
+//obtener usuarios      
 async function getClientes() {
   try {
     const result = await pool.query(`SELECT * FROM clientes`); // WHERE email  y rut 
@@ -79,37 +79,54 @@ async function getDeleteUser(email) {
 }
 
 //crear nueva solicitud de servicio
-async function newService(id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo){
+async function newService( rut_id, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo){
   console.log("acceso a la funcion de guardar cliente")
   const result = await pool.query (
-        `INSERT INTO clientes  ( id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo) 
-      values ('${id_solicitud}', '${rut}', '${fecha_solicitud}', '${numero_certificacion}' ,'${fecha_entrega}', '${estado_solicitud}',' ${codigo_equipo}') RETURNING *;`
+        `INSERT INTO solicitud_de_servicio  (  rut_id, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo) 
+      values ( '${rut_id}', '${fecha_solicitud}', '${numero_certificacion}' ,'${fecha_entrega}', '${estado_solicitud}', '${codigo_equipo}') RETURNING *;`
       );
     const cliente = result.rows[0];
     return cliente;
 }
 
- 
-/* 
-  const updateSkater = async (skater) => {
-    const values = Object.values(skater)
-    const result = await pool.query(
-      `UPDATE skaters SET  nombre = $1, password = $2 , anos_experiencia = $3 , especialidad = $4   RETURNING *;`
-      , values);
-    return result.rows[0];
-  }
-  
-  updateSkater,
-  deleteSkater
-};
-  */
+//obtener solicitudes de servicio
+async function newService () {
+  const result = await pool.query (
+    `SELECT * FROM  solicitud_de_servicio`
+  );
+  const cliente = result.rows;
+  return cliente;
+}
+
+// agregar nuevos equipos
+async function nuevoEquipo( codigo_equipo, nombre_equipo, modelo, estado_equipo){
+  console.log("acceso a la funcion de nuevo equipo")
+  const result = await pool.query (
+        `INSERT INTO equipos  ( codigo_equipo, nombre_equipo, modelo, estado_equipo) 
+      values ( '${codigo_equipo}', '${nombre_equipo}', '${modelo}' ,'${estado_equipo}') RETURNING *;`
+      );
+    const cliente = result.rows[0];
+    return cliente;
+}
+
+//obtener equipos
+async function getEquipos(){
+  const result = await pool.query (
+    `SELECT  * FROM  equipos`
+  );
+  const cliente = result.rows;
+  return cliente;
+}
+//lo ultimo agregue
+
  
 module.exports = {
+  newService,
   nuevoCliente,
   getClientes,
+  nuevoEquipo,
+  getEquipos,
   getUserByEmail,
   getUserByRut,
   getDeleteUser,
-  newService,
-
-};
+ };

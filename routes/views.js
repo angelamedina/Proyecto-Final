@@ -23,16 +23,24 @@ router.get("/admin" , async (req, res) => {
     res.render("Admin", { clientes });
 })
 
+router.get("/equipos", async (req,res) => {
+    const clientes = await db.getEquipos();
+    res.render("Equipos", { clientes });
+})
+
 router.get("/servicio" , (req, res) => {
     res.render("Servicio");
 })
 
-router.get("listadoC" , (req, res) => {
-    res.render("ListadoC");
+router.get("/listadoC" , async(req, res) => {
+    const clientes = await db.getEquipos ();
+    res.render("ListadoC", { clientes });
 })
 
-router.get("/listadoA" , (req, res) => {
-    res.render("ListadoA");
+//lo ultimo agregado
+router.get("/listadoA" , async(req, res) => {
+    const clientes = await db.newService ();
+    res.render("ListadoA", { clientes });
 })
 
 module.exports = router;

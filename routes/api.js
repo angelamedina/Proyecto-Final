@@ -12,31 +12,7 @@ router.get("/clientes" , async(req, res) => {
     res.send(clientes);
 });
 
-/* falta
-router.get("/listadoC", async (req, res) => { 
-    const clientes = await db.getClientes();
-    console.log("acceso a la ruta listado : ", clientes )
-    res.send(clientes);
-});
 
-router.get("/listadoA", async (req, res) => { 
-    const clientes = await db.getClientes();
-    console.log("acceso a la ruta listado : ", clientes )
-    res.send(clientes);
-});
-
-apiRouter.put("/clientes", async (req, res) => { 
-    const { id, auth } = req.body;
-    const usuario = await db.setUsuarioStatus(id, auth);
-    await sendEmail(usuario, false);
-    res.send(usuario.auth);
-});*/
-
-
-//router.get("/listado")
-
-
-     //deberia cambiar registro por clientes??
 router.post("/registro",  async (req, res) => {
       try {  
         const { rut, nombre, apellido, telefono, direccion, email,  password } = req.body;
@@ -86,36 +62,59 @@ router.post('/login' , async (req,res) => {
 
 });
 
-    //nuevo servicio
+//nuevo servicio
 router.post("/Servicio",  async (req, res) => {
-        const { id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
-    
-        console.log("acceso a la ruta servicio")
+        const { rut, fecha_solicitud, tipo_trabajo, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
+        try { 
+        console. log("acceso a la ruta servicio")
         //alert("acceso a la ruta servicio")
-        const user = await db.newService(id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo);
+        const user = await db.newService( rut, fecha_solicitud, tipo_trabajo, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo);
         res.status(201).send(user);
-        
+        } catch (e) {
+            res.status(500).send(e)
+        }
 });
 
-    /* falta 
-    router.post("/ListadoA",  async (req, res) => {
-         const { id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
-        
-        console.log("acceso a la ruta servicio")
-            //alert("acceso a la ruta servicio")
-        const user = await db.newService(id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo);
-        res.status(201).send(user);
-            
-        });
+//ingresar equipo
+router.post("/Equipos",  async (req, res) => {
+    const { codigo_equipo, nombre_equipo, modelo, estado_equipo } = req.body;
+    try { 
+    console. log("acceso a la ruta equipos")
+    //alert("acceso a la ruta servicio")
+    const user = await db.nuevoEquipo( codigo_equipo, nombre_equipo, modelo, estado_equipo);
+    res.status(201).send(user);
+    } catch (e) {
+        res.status(500).send(e)
+    }
+});
 
-    router.post("/ListadoC",  async (req, res) => {
-                const { id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
-            
-                console.log("acceso a la ruta servicio")
-                //alert("acceso a la ruta servicio")
-                const user = await db.newService(id_solicitud, rut, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo);
-                res.status(201).send(user);
+//listado equipos 
+router.get("/ListadoC",  async(req, res) => {
+            console.log("acceso a la ruta equipos")
+            //alert("acceso a la ruta listadoC")
+            const user = await db.getEquipos();
+            res.status(201).send(user);
                 
-        });
-        */
+});
+
+
+//listado servicios
+router.get("/listadoA", async (req, res) => {
+    console.log("accaeso a ruta servicios")
+    const user = await db.newService ();
+    res.status(201).send(user);
+});
+
+// Logout lo ultimo que agregue
+/*router.get('/logout', function(req, res, next) {
+    // remove the req.user property and clear the login session
+    req.logout();
+  
+    // destroy session data
+    req.session = null;
+  
+    // redirect to homepage
+    res.redirect('/Home');
+  });*/
+       
 module.exports = router;   

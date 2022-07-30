@@ -1,7 +1,22 @@
+<!--NAVBAR-->
+<div class="fixed-top container-fluid ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent text-white">
+  
+      <a class="navbar-brand" href="#Inicio">TEST-CHILE S.A.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item active"><a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#empresa">Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
 <div class="py-5 container">
   <h2>Iniciar Sesión</h2>
-  
-
   
     <div class="form-group border">
       <div class="form-group">
@@ -13,23 +28,9 @@
         <input class="form-control w-50 m-auto" id="password" type="password">
       </div>
    
-    <button class="btn btn-light mb-3" onclick="login()">Ingresar</button>
-    {{!--<p>¿Aún no tienes cuenta? <a href="/registro">Regístrate</a></p>--}}
-   </div>
-  {{!--<p id="loginError" class="bg-danger text-white p-3 d-none">
-          Usuario o contraseña incorrecta ;
-        </p>
-        <div id="loginSuccess" class="text-center d-none">
-          <p class="bg-success text-white p-3 mb-2">
-            Usuario autenticado con éxito;
-          </p>
-          <p class="p-3">
-            <a id="private" href="/Servicio" class="text-white">Solicitar servicio</a>
-          </p>
-        </div>--}}
+      <button class="btn btn-light mb-3" onclick="login()">Ingresar</button>
 
-  
-  
+    </div>
 </div>
 
 <script>

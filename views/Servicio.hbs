@@ -1,6 +1,22 @@
+<!--NAVBAR-->
+<div class="fixed-top container-fluid ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent text-white">
+  
+      <a class="navbar-brand" href="#Inicio">TEST-CHILE S.A.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item active"><a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#CerrarSesion">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
-<!--opcion 1 -->
-<div class="w-50 m-auto">
+
+<div class="w-50 m-auto container">
   <div class="row my-5 border rounded p-5">
       <h3 class="text-center mb-5 col-12">Ingrese los datos</h3>
       <div class="col col-4">id solicitud:</div>
@@ -8,57 +24,49 @@
       <div class="col col-4">rut:</div>
       <div class="col col-8"><input type="text" class="form-control" id="rut"></div>
       <div class="col col-4">fecha solicitud:</div>
-      <div class="col col-8"><input type="text" class="form-control" id="fecha_solicitud"></div>
+      <div class="col col-8"><input type="date" class="form-control" id="fecha_solicitud"></div>
       <div class="col col-4">numero certificacion:</div>
-      <div class="col col-8"><input type="text" class="form-control" id="numero_certificado"></div>
+      <div class="col col-8"><input type="text" class="form-control" id="numero_certificacion"></div>
       <div class="col col-4">fecha entrega:</div>
-      <div class="col col-8"><input type="text" class="form-control" id="fecha_entrega"></div>
+      <div class="col col-8"><input type="date" class="form-control" id="fecha_entrega"></div>
       <div class="col col-4">estado solicitud:</div>
       <div class="col col-8"><input type="text" class="form-control" id="estado_solicitud"></div>
       <div class="col col-4">codigo equipo:</div>
       <div class="col col-8"><input type="text" class="form-control" id="codigo_equipo"></div>
-         
-      </div>
   </div>
 </div>
 
-<h3 class="text-center mb-5 col-12">Seleccione tipo de trabajo</h3>
-<select class="form-select" aria-label="Default select example">
-  
+<h3 class="text-center  col-12 container mt-1">Seleccione tipo de trabajo</h3>
+<select class="form-select mt-1" aria-label="Default select example">
   <option selected>Tipo de trabajo</option>
   <option value="1">reparación</option>
   <option value="2">calibración</option>
-
 </select>
 
-<button class="bg-light rounded text-success m-auto" onclick="saveService()">Ingresar solicitud</button>
-          {{!-- <p id="creado" class="bg-success text-center text-white p-3 d-none">
-          Servicio creado con éxito &#128131;
-        </p>--}}
-
-
-
-<script> //usado en registro
+<button class="btn btn-light rounded  m-auto mb-5" onclick="saveService()">Ingresar solicitud</button>
+      
+        
+<script> 
     async function saveService() {
         const id_solicitud = document.getElementById('id_solicitud').value;
         const rut = document.getElementById('rut').value;
         const fecha_solicitud = document.getElementById('fecha_solicitud').value;
-        //const numero_certificacion = document.getElementById('numero de certificacion').value; lo entrega el admin
+        const numero_certificacion = document.getElementById('numero_certificacion').value; 
         const fecha_entrega = document.getElementById('fecha_entrega').value;
         const estado_solicitud = document.getElementById('estado_solicitud').value;
         const codigo_equipo = document.getElementById('codigo_equipo').value;
     let payload = { id_solicitud, rut, fecha_solicitud, fecha_entrega, estado_solicitud, codigo_equipo}
     const data = await axios.post("api/Servicio" , payload);
+    alert("solicitud ingresada con exito");
+  
     //const data = await axios.get("api/listadoC");
-     window.location.href = "/listadoA";
+    window.location.href = "/listadoA";
+    //window.location.href = "/listadoC";
 
     console.log(data)
    }
 </script>
-
-
-<h1>Vista privada</h1>
-
+<!--
 <script>
   if (!localStorage.getItem("token")) {
     window.location.replace("/login");
@@ -69,7 +77,7 @@
     console.log(data);
   }
   getClientes();
-</script>
+</script>-->
 
 
 

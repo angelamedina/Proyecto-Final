@@ -1,0 +1,55 @@
+<!--NAVBAR-->
+<div class="fixed-top container ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent text-white">
+        <a class="navbar-brand" href="#Inicio">TEST-CHILE S.A.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item active">
+          <a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#empresa">Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="w-50 m-auto container">
+  <div class="row my-5 border rounded p-5">
+      <h3 class="text-center mb-5 col-12">Ingrese los datos del equipo</h3>
+      <div class="col col-4">codigo equipo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="codigo_equipo"></div>
+      <div class="col col-4">nombre equipo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="nombre_equipo"></div>
+      <div class="col col-4">modelo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="modelo"></div>
+      <div class="col col-4">estado equipo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="estado_equipo"></div>
+  </div>
+</div>
+<button class="btn btn-light rounded  m-auto mb-5" onclick="saveData()">Ingresar datos</button>
+          
+<script> 
+    async function saveData() {
+        const codigo_equipo = document.getElementById('codigo_equipo').value;
+        const nombre_equipo = document.getElementById('nombre_equipo').value;
+        const modelo = document.getElementById('modelo').value;
+        const estado_equipo = document.getElementById('estado_equipo').value; 
+       
+    let payload = { codigo_equipo, nombre_equipo, modelo, estado_equipo}
+    const data = await axios.post("api/Equipos" , payload);
+    alert("solicitud ingresada con exito");
+  
+    //const data = await axios.get("api/listadoC");
+    window.location.href = "/listadoC";
+    console.log(data)
+   }
+</script>
+
+{{!--<script>
+  //function funcionVolverInicio(){
+  //history.go(-1);
+  //}
+//</script>--}}

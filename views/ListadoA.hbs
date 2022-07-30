@@ -1,38 +1,45 @@
-<table class="table">
-    <h2>Lista de servicios clientes</h2>
-    <hr>
+<!--NAVBAR-->
+<div class="fixed-top container-fluid mb-5 ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent text-white">
+    <a class="navbar-brand" href="#Inicio">TEST-CHILE S.A.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item active"><a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#empresa">Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<table class="table container">
+    <h2 class="mt-5">Solicitud de Clientes</h2>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">nombre equipo</th>
+      <th scope="col">id solicitud</th>
+      <th scope="col">Rut</th>
+      <th scope="col">fecha solicitud</th>
+      <th scope="col">numero certificacion</th>
+      <th scope="col">fecha entrega</th>
+      <th scope="col">estado solicitud</th>
       <th scope="col">codigo equipo</th>
-      <th scope="col">modelo</th>
-      <th scope="col">estado equipo</th>
     </tr>
   </thead>
 
-  <!--
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Nivel</td>
-      <td>AA</td>
-      <td>AA</td>
-    </tr>
-    
-    <tr>
-      <th scope="row">2</th>
-      <td>Densimetro nuclear</td>
-      <td>BB</td>
-      <td>BB</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>CC</td>
-      <td>CC</td>
-      <td>CC</td>
-    </tr>
+  <tbody id="cuerpo">
+    {{#each clientes}}
+      <tr>
+        <td>{{this.id_solicitud}}</td>
+        <td>{{this.rut_id}}</td>
+        <td>{{this.fecha_solicitud}}</td>
+        <td>{{this.numero_certificacion}}</td>
+        <td>{{this.fecha_entrega}}</td>
+        <td>{{this.estado_solicitud}}</td>
+        <td>{{this.codigo_equipo}}</td>
+      </tr>
+    {{/each}}
   </tbody>
 </table>
--->
 

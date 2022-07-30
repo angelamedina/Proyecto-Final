@@ -48,42 +48,6 @@ app.engine(
 
 app.set("view engine", "hbs");
 
-//vistas
-// app.get("/" ,  (req, res) => {
-//     res.render("Home")
-// });
-
-// app.get("/registro" , (req, res) => {
-//     res.render("Registro");
-// });
-
-// app.get("/login" , (req, res) => {
-//     res.render("Login");
-// })
-
-// app.get("/admin" , async (req, res) => {
-//     const clientes =await db.getClientes();
-//     res.render("Admin", { clientes });
-// })
-
-// app.get("/admin" ,  (req, res) => { 
-//         res.render("Admin");
-// })
-
-
-// app.post("/cliente", async (req, res) => {
-//     const { rut, nombre, apellido, telefono, direccion, email, password } = req.body;
-//     try {
-//       const cliente = await nuevoCliente (rut, nombre, apellido, telefono, direccion, email, password);
-//        res.status(201).send(cliente);
-//     } catch (e) {
-//         res.status(500).send({
-//             error: `Algo salio mal   ${e}` ,
-//             code:500
-//         })
-//     };
-    
-// })
 
 // Vistas
 app.use("/", require("./routes/views"));
@@ -97,30 +61,4 @@ app.get("*" , (req,res) =>{
     res.redirect("/");
 });
 
-// Paso 3
-/*
-app.get("/Registro", (req, res) => {
-    res.send(`
-    <form method="POST" 
-    <input type="text" name="rut" required placeholder="Rut">
-    <input type="text" name="nombre" required placeholder="Nombre">
-    <input type="text" name="apellido" required placeholder="Apellido">
-    <input type="text" name="telefono" required placeholder="Telefono">
-    <input type="text" name="email" required placeholder="Email">
-    <input type="text" name="password" required placeholder="Password">
- 
-    <button> Registro </button>
-    </form>
-    `);
-    });
 
-    // Paso 4
-    app.post("/Registro", (req, res) => {
-    const { rut, nombre, apellido, telefono, email,  password } = req.body;
-    const name = `${rut} ${nombre} ${apellido} ${telefono} ${email} ${password}`;
-    cancion.mv(`${__dirname}/canciones/${name}.mp3`, (err) => {
-    
-    res.send("Archivo cargado con éxito");
-    });
-    });
-    */
