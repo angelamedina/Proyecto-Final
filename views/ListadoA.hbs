@@ -7,8 +7,8 @@
         </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ">
-        <li class="nav-item active"><a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#empresa">Salir</a></li>
+        <li class="nav-item active"><a class="nav-link" href="/Home">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.google.cl">Salir</a></li>
       </ul>
     </div>
   </nav>
@@ -25,6 +25,7 @@
       <th scope="col">fecha entrega</th>
       <th scope="col">estado solicitud</th>
       <th scope="col">codigo equipo</th>
+      <th scope="col">Accion a Ejecutar</th>
     </tr>
   </thead>
 
@@ -38,8 +39,12 @@
         <td>{{this.fecha_entrega}}</td>
         <td>{{this.estado_solicitud}}</td>
         <td>{{this.codigo_equipo}}</td>
-      </tr>
-    {{/each}}
+     
+      <td><button id="finalizar" class="btn btn-success" onclick="finalizarServicio()">Finalizar Servicio</button></td>
+     </tr>
+     {{/each}}
   </tbody>
 </table>
+
+
 

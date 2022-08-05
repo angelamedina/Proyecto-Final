@@ -8,14 +8,59 @@
         </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ">
-        <li class="nav-item active"><a class="nav-link" href="#Inicio">Inicio <span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#CerrarSesion">Cerrar Sesión</a></li>
+        <li class="nav-item active"><a class="nav-link" href="/Home">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.google.cl">Salir</a></li>
       </ul>
     </div>
   </nav>
 </div>
 
+<div class="w-50 m-auto container">
+  <div class="row my-5 border rounded p-5">
+      <h3 class="text-center mb-5 col-12">Ingrese los datos</h3>
+  
+      <div class="col col-4">Rut:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="rut_id"></div>
+      <div class="col col-4">fecha solicitud:</div>
+      <div class="col col-8"><input type="date" class="form-control" id="fecha_solicitud"></div>
+      <div class="col col-4">numero certificacion:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="numero_certificacion"></div>
+      <div class="col col-4">tipo trabajo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="tipo_trabajo"></div>
+      <div class="col col-4">fecha entrega:</div>
+      <div class="col col-8"><input type="date" class="form-control" id="fecha_entrega"></div>
+      <div class="col col-4">estado solicitud:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="estado_solicitud"></div>
+      <div class="col col-4">codigo equipo:</div>
+      <div class="col col-8"><input type="text" class="form-control" id="codigo_equipo"></div>
+      
 
+<button class="btn btn-light rounded  m-auto mb-5" onclick="saveService()">Ingresar solicitud</button>
+
+<script> 
+    async function saveService() {
+        const rut = document.getElementById('rut_id').value;
+        const fecha_solicitud = document.getElementById('fecha_solicitud').value;
+        const numero_certificacion = document.getElementById('numero_certificacion').value; 
+        const tipo_trabajo = document.getElementById('tipo_trabajo').value;
+        const fecha_entrega = document.getElementById('fecha_entrega').value;
+        const estado_solicitud = document.getElementById('estado_solicitud').value;
+        const codigo_equipo = document.getElementById('codigo_equipo').value;
+    
+    let payload = { rut, fecha_solicitud, numero_certificacion, tipo_trabajo, fecha_entrega, estado_solicitud, codigo_equipo }
+    const  data  = await axios.post("api/servicio" , payload);
+    alert("solicitud ingresada con exito");
+  
+    //const data = await axios.get("api/listadoC");
+    window.location.href = '/listadoA' ;
+    console.log(response.data);
+    }
+    //window.location.href = "/listadoC";
+  
+</script>
+
+
+{{!--
 <div class="w-50 m-auto container">
   <div class="row my-5 border rounded p-5">
       <h3 class="text-center mb-5 col-12">Ingrese los datos</h3>
@@ -44,8 +89,9 @@
 </select>
 
 <button class="btn btn-light rounded  m-auto mb-5" onclick="saveService()">Ingresar solicitud</button>
-      
-        
+ --}}     
+
+ {{!--     
 <script> 
     async function saveService() {
         const id_solicitud = document.getElementById('id_solicitud').value;
@@ -65,7 +111,9 @@
 
     console.log(data)
    }
-</script>
+</script>--}}  
+
+
 <!--
 <script>
   if (!localStorage.getItem("token")) {

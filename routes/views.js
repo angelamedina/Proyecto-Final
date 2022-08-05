@@ -39,8 +39,12 @@ router.get("/listadoC" , async(req, res) => {
 
 //lo ultimo agregado
 router.get("/listadoA" , async(req, res) => {
-    const clientes = await db.newService ();
+    const clientes = await db.getSolicitudDeServicio ();
     res.render("ListadoA", { clientes });
 })
+
+
+//revisar
+
 
 module.exports = router;

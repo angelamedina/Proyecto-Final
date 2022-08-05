@@ -46,23 +46,27 @@ async function getUserByEmail(email) {
   }
 }
 
-//obtener usuarios por rut
-async function getUserByRut(rut) {
-  try {
-    const SQLQuery = {
-      text: `SELECT * FROM clientes WHERE rut = $1;`,
-      values: [rut]
-    };
-    const { rows } =await pool.query(SQLQuery);
-    if (rows.length === 0) {
-      throw 'Usuario no encontrado';
-    }    
-    return rows[0];
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
+
+  
+/*
+const eliminarPorRut = async (rut) => {
+  const SQLquery = {
+    text: `DELETE FROM clientes WHERE rut = $1 RETURNING *;`,
+    values: [rut]
+  };
+  console.log(rut)
+  const result = await pool.query(SQLquery);
+  return result.rows[0];
+};*/
+
+const deleteCliente = async (rut) => {
+  const { rows } = await pool.query(
+    `DELETE FROM clientes WHERE rut = ${rut}`
+  );
+ 
+  return rows;
 }
+
 
 //eliminar usuarios por email
 async function getDeleteUser(email) {
@@ -79,31 +83,36 @@ async function getDeleteUser(email) {
 }
 
 //crear nueva solicitud de servicio
-async function newService( rut_id, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo){
+async function newService( rut, fecha_solicitud, numero_certificacion, tipo_trabajo, fecha_entrega, estado_solicitud, codigo_equipo){
   console.log("acceso a la funcion de guardar cliente")
   const result = await pool.query (
-        `INSERT INTO solicitud_de_servicio  (  rut_id, fecha_solicitud, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo) 
-      values ( '${rut_id}', '${fecha_solicitud}', '${numero_certificacion}' ,'${fecha_entrega}', '${estado_solicitud}', '${codigo_equipo}') RETURNING *;`
+        `INSERT INTO solicitud_de_servicio  (rut_id, fecha_solicitud, numero_certificacion, tipo_trabajo, fecha_entrega, estado_solicitud, codigo_equipo) 
+      values ('${rut}', '${fecha_solicitud}', '${numero_certificacion}', '${tipo_trabajo}', '${fecha_entrega}', '${estado_solicitud}', '${codigo_equipo}') RETURNING *;`
       );
     const cliente = result.rows[0];
     return cliente;
 }
 
-//obtener solicitudes de servicio
-async function newService () {
-  const result = await pool.query (
-    `SELECT * FROM  solicitud_de_servicio`
-  );
-  const cliente = result.rows;
-  return cliente;
-}
+//obtener solicitudes de servicios
+async function getSolicitudDeServicio() {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM solicitud_de_servicio`
+      ); // WHERE email  y rut 
+    console.log("acceso a guardar cliente")
+    const cliente = result.rows;
+    return cliente;
+    } catch (e) {
+      throw e;
+    }
+  }
 
 // agregar nuevos equipos
 async function nuevoEquipo( codigo_equipo, nombre_equipo, modelo, estado_equipo){
   console.log("acceso a la funcion de nuevo equipo")
   const result = await pool.query (
         `INSERT INTO equipos  ( codigo_equipo, nombre_equipo, modelo, estado_equipo) 
-      values ( '${codigo_equipo}', '${nombre_equipo}', '${modelo}' ,'${estado_equipo}') RETURNING *;`
+      values ('${codigo_equipo}', '${nombre_equipo}', '${modelo}' ,'${estado_equipo}') RETURNING *;`
       );
     const cliente = result.rows[0];
     return cliente;
@@ -124,9 +133,10 @@ module.exports = {
   newService,
   nuevoCliente,
   getClientes,
+  getSolicitudDeServicio,
   nuevoEquipo,
   getEquipos,
   getUserByEmail,
-  getUserByRut,
+  deleteCliente,
   getDeleteUser,
  };

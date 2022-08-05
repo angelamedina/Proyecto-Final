@@ -64,11 +64,11 @@ router.post('/login' , async (req,res) => {
 
 //nuevo servicio
 router.post("/Servicio",  async (req, res) => {
-        const { rut, fecha_solicitud, tipo_trabajo, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
+        const { rut, fecha_solicitud, numero_certificacion, tipo_trabajo, fecha_entrega, estado_solicitud, codigo_equipo } = req.body;
         try { 
         console. log("acceso a la ruta servicio")
         //alert("acceso a la ruta servicio")
-        const user = await db.newService( rut, fecha_solicitud, tipo_trabajo, numero_certificacion, fecha_entrega, estado_solicitud, codigo_equipo);
+        const user = await db.newService( rut, fecha_solicitud, numero_certificacion, tipo_trabajo, fecha_entrega, estado_solicitud, codigo_equipo);
         res.status(201).send(user);
         } catch (e) {
             res.status(500).send(e)
@@ -101,20 +101,35 @@ router.get("/ListadoC",  async(req, res) => {
 //listado servicios
 router.get("/listadoA", async (req, res) => {
     console.log("accaeso a ruta servicios")
-    const user = await db.newService ();
+    const user = await db.getSolicitudDeServicio ();
     res.status(201).send(user);
 });
 
-// Logout lo ultimo que agregue
-/*router.get('/logout', function(req, res, next) {
-    // remove the req.user property and clear the login session
-    req.logout();
-  
-    // destroy session data
-    req.session = null;
-  
-    // redirect to homepage
-    res.redirect('/Home');
-  });*/
+
+router.delete("/cliente", async (req, res) => {
+    
+    try {
+        const { rut } = req.query
+        await db.deleteCliente(rut)
+        res.send("usuario eliminado con exito");
+    } catch (e) {
+        res.status(500).send({
+            error: `Algo salió mal... ${e}`,
+            code: 500
+        })
+    };
+});
+//eliminar por rut
+/*router.delete("/cliente/:rut", async (req, res) => {
+    try{
+        const { rut } = req.params;
+        const cliente = await db.eliminarPorRut(rut);
+        res.send(cliente);
+    }catch (error){
+        res.send(error).status(500);
+    }
+});*/
+
+
        
 module.exports = router;   
